@@ -91,4 +91,20 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id, name, employer, location, positionType, coreCompetency);
     }
+    @Override
+    public String toString() {
+        if (name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
+            return "OOPS! This job does not seem to exist.";
+        } else {
+            String lineBreak = System.lineSeparator();
+            String toStringID = "ID: " + id + lineBreak;
+            String toStringName = "Name: " + name + lineBreak;
+            String toStringEmployer = "Employer: " + employer + lineBreak;
+            String toStringLocation = "Location: " + location + lineBreak;
+            String toStringPositionType = "Position Type: " + positionType + lineBreak;
+            String toStringCoreComp = "Core Competency: " + coreCompetency + lineBreak;
+            String jobString = " " + lineBreak + toStringID + toStringName + toStringEmployer + toStringLocation + toStringPositionType + toStringCoreComp + " ";
+            return jobString;
+        }
+    }
 }

@@ -2,6 +2,10 @@ package org.launchcode.techjobs.oo;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class JobTest {
@@ -42,5 +46,39 @@ public class JobTest {
 //        int id2 = job2.getId();
 //        assertTrue(id1 != id2);
         assertFalse(job1.equals(job2));
+    }
+    @Test
+    public void testToStringStartsAndEndsWithNewLine () {
+        Job job1 = new Job("Banana counter", new Employer("Chiquita"), new Location("Zimbabwe"), new PositionType("Quality control"), new CoreCompetency("Counting"));
+        String testToString = job1.toString();
+        String lineBreak = System.lineSeparator();
+        List<String> jobList = Arrays.asList(testToString.split(lineBreak));
+        assertEquals(jobList.get(0), " ");
+        assertEquals(jobList.get(jobList.size() -1), " ");
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job1 = new Job("Banana counter", new Employer("Chiquita"), new Location("Zimbabwe"), new PositionType("Quality control"), new CoreCompetency("Counting"));
+        String testToString = job1.toString();
+        String lineBreak = System.lineSeparator();
+        List<String> jobList = Arrays.asList(testToString.split(lineBreak));
+        String jobID = "ID: " + job1.getId();
+        String jobName = "Name: " + job1.getName();
+        String jobEmployer = "Employer: " + job1.getEmployer();
+        String jobLocation = "Location: " + job1.getLocation();
+        String jobPositionType = "Position Type: " + job1.getPositionType();
+        String jobCoreComp = "Core Competency: " + job1.getCoreCompetency();
+        assertEquals(jobList.get(1), jobID);
+        assertEquals(jobList.get(2), jobName);
+        assertEquals(jobList.get(3), jobEmployer);
+        assertEquals(jobList.get(4), jobLocation);
+        assertEquals(jobList.get(5), jobPositionType);
+        assertEquals(jobList.get(6), jobCoreComp);
+    }
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job1 = new Job();
+        String testToString = job1.toString();
+        assertEquals("OOPS! This job does not seem to exist.", testToString);
     }
 }
